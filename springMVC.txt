@@ -1,0 +1,86 @@
+Spring MVC 注解
+
+
+注解：annotation 
+
+
+@RequestMapping
+
+METHOD
+相对于类之间的路径
+如果要做处理method必须声明RequestMapping value
+
+CLASS
+想对于 项目定义了相对的路径
+
+eq:请求/test/start
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/test")
+public class StartController {
+
+	
+	@RequestMapping("/start")
+	public String start(){
+		return "start";
+	}
+}
+
+ /test是定义在类上的RequestMapping
+ /start是定义在方法上的RequestMapping
+ 
+ 
+ Spring restful
+ 
+ 把请求的参数作为请求路径的一部分
+ 
+ eq:
+ 1-common-http://localhost:8080/springMVC.ch02/start.html?name=qingqing
+ 2-restful- http://localhost:8080/springMVC.ch02/start/qingqing.html
+ 
+ 
+ 
+ 
+ @PathVariable
+ 
+ 
+	/*
+	 * {username} 代表代表可变参数,@PathVariable用来指定这个参数 该参数名需要与可变参数名一致
+	 * */
+	@RequestMapping("/start/{username}") 
+	public String start(HttpServletRequest request,@PathVariable("username") String username){
+		
+		System.out.println(username);
+		return "start";
+	}
+ 
+ temp
+ java 编译方式 debug(不隐藏变量名)  ,release (隐藏变量名)
+ 
+ java IDE一般是以debug编译
+ javac 以release编译
+   
+ 使用 @PathVariable("username") 时 如果不指定名称 那么在release编译 运行后出错
+ 
+ 
+ 不同的请求方法，映射不同的处理方法
+ @RequestParam 参数类型  参数名   取出对应的request.getParameter(参数名) 的值
+ @CookieValue  参数类型 成熟名  对出对应的cookie参数对应的信息
+ @RequestHeader  参数类型 成熟名  对出对应的requestHeader参数对应的信息
+ 参数
+ 1不使用任何参数()
+ 2使用任何参数( @PathVariable)
+ 3使用任何参数()
+ 
+ 
+ 
+ 返回值
+ 
+ 1没有返回值，也没有任何out输出
+ //生成隐含的viewName  --按请求路径   ${appName}/test/default.html --->test/default--->Resolver配置的prefix+test/default+Resolver配置的suffix|("/WEB/INF/pages/test/default.jsp")
+ 2返回任何类型的值
+ 
+ 
+ 

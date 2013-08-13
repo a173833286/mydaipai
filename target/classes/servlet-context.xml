@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	                    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	     
+	     
+	    <context:component-scan base-package="com.dll.annation.controller"/> 
+	     
+	     
+	     
+	     
+	    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <!-- 默认viewClass 为   org.springframework.web.servlet.view.JstlView-->
+	     <property name="prefix" value="/WEB-INF/pages/"></property>
+	     <property name="suffix" value=".jsp"></property>
+	    </bean> 
+
+	     <mvc:interceptors>
+	      <mvc:interceptor>
+	       <mvc:mapping path="/test/*"/>
+	       <bean class="com.dll.inteceptors.MyInteceptors"/>
+	      </mvc:interceptor>
+	     
+	     </mvc:interceptors>
+	     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" >
+	      <property name="basename" value="message"></property>
+	     </bean>
+	     
+	     
+	       <!--       <context:component-scan base-package="com.dll">
+	             <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	            </context:component-scan>
+	            
+	            <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	            <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	            
+	            <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver" id="viewResolver">
+	             <property name="cache" value="true"></property>
+	             <property name="prefix" value=""></property>
+	             <property name="suffix" value=".html"></property>
+	             <property name="viewClass" value="org.springframework.web.servlet.view.freemarke.FreeMarkerView" ></property>
+	             <property name="exposeRequestAttributes" value="true" ></property>
+	             <property name="allowRequestOverride" value="true" ></property>
+	             <property name="exposeSessionAttributes" value="true" ></property>
+	             <property name="allowSessionOverride" value="true" ></property>
+	             <property name="exposeSpringMacroHelpers" value="true" ></property>
+	             <property name="contentType" value="text/html;charset=UTF-8"></property>
+	            </bean>
+	     
+	            <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	             <property name="templateLoaderPaths">
+	              <list>
+	                <value>/pages/</value>
+	              </list>
+	             </property>
+	             <property name="freemarkerSettings">
+	              <props>
+	               <prop key="template_update_delay">5</prop>
+	               <prop key="defaultEncoding">UTF-8</prop>
+	               <prop key="locale">zh_CN</prop>
+	               <prop key="boolean_format">true,false</prop>
+	               <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+	               <prop key="date_format">yyyy-MM-dd</prop>
+	               <prop key="time_format">HH:mm:ss</prop>
+	               <prop key="number_format">0.######</prop>
+	               <prop key="whitespace_stripping">true</prop>
+	              </props>
+	             </property>
+	             
+	            </bean>
+	            <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	              <property name="mappings">
+	               <props>
+	                <prop key="start.test">startController</prop>
+	               </props>
+	               
+	              </property>
+	              
+	            </bean>
+	            
+	            <bean id="startController" class="com.dll.StartController"></bean>
+	        -->    
+</beans>
